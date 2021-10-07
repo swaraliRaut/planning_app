@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load task_tags %}
+{% block content %}
+    <div id='chosen' value = {{choice}}>
+    <div id='task' task_code = {{task.id}}>
+        <h2> task code {{task.id}} </h2>
+        <h2> {{task.name}}</h2>
+        <h2> {{task.desc}}</h2>
+        {% for vote_choice in vote_list%}
+            <div>
+                <input type="radio" id= {{ "option_"|addstr:vote_choice }} name="vote" class="radio" value={{ vote_choice }} />
+                <label for={{ "option_"|addstr:vote_choice }} class="option"> {{ vote_choice }} </label>
+                <label id = {{ "option_"|addstr:vote_choice|addstr:"_count" }} class = "vote_count"></label>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script src="{% static "js/task.js" %}"></script>
+{% endblock content %}
