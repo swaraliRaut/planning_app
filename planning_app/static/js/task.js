@@ -1,19 +1,18 @@
 var taskCode = document.getElementById("task").getAttribute("task_code");
-console.log("task code", taskCode)
-
 var connectionString = 'ws://' + window.location.host + '/ws/task/' + taskCode + '/';
+
+// creating websocket
 var taskSocket = new WebSocket(connectionString);
 
 var voteChoice = document.getElementsByName("vote")
-
 var currentChoice = document.getElementById("chosen").getAttribute("value");
-console.log(currentChoice)
-
 if (currentChoice >= 0) {
     var radioBtn = document.getElementById(`option_${currentChoice}`);
     radioBtn.checked = true
 }
 
+
+// setting onclick listerner to send message to server
 for (vote_radio in voteChoice) {
     voteChoice[vote_radio].onclick = function (event) {
         option = document.getElementById(event.target.id)
@@ -40,7 +39,7 @@ function connect() {
             connect();
         }, 1000);
     };
-    // Sending the info about the room
+    // update state on page after receiving message from server
     taskSocket.onmessage = function (e) {
         let data = JSON.parse(e.data);
         console.log("data from server", data)

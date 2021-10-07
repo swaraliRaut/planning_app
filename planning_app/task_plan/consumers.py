@@ -1,8 +1,9 @@
 import asyncio
 import json
+
 from channels.consumer import AsyncConsumer
+from task_plan.model_utils import get_vote_count_for_task, vote_for_task
 from task_plan.models import Vote
-from task_plan.model_utils import vote_for_task, get_vote_count_for_task
 
 
 class TaskConsumer(AsyncConsumer):

@@ -1,5 +1,5 @@
 from django.urls import path
-from task_plan.tasks import show, create
+from task_plan.tasks import create, show
 
 urlpatterns = [
     path('create', create, name="create"),

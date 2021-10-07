@@ -1,6 +1,7 @@
-from task_plan.models import Vote, Task
 from channels.db import database_sync_to_async
 from django.db.models import Count
+from task_plan.models import Task, Vote
+
 
 def get_users_vote_for_task(task, user):
     choice = None
