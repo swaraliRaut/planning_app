@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',
+    'django_extensions',
 
     #List of our own apps
     'task_plan',
@@ -132,13 +133,17 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+
 ASGI_APPLICATION = "planning_app.asgi.application"
 
 CHANNEL_LAYERS = {
   "default": {
     "BACKEND": "channels_redis.core.RedisChannelLayer",
     "CONFIG": {
-      "hosts": [("127.0.0.1", 6379)],
+      "hosts": [("127.0.0.1", REDIS_PORT)],
     },
   },
 }
