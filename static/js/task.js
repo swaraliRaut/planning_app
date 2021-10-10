@@ -12,14 +12,14 @@ if (currentChoice >= 0) {
 }
 
 
-// setting onclick listerner to send message to server
+// setting onclick listener to send message to server
 for (vote_radio in voteChoice) {
     voteChoice[vote_radio].onclick = function (event) {
         option = document.getElementById(event.target.id)
         newChoice = option.value
         serverData = {"task_code": taskCode, "current_choice": currentChoice, "new_choice": newChoice}
         taskSocket.send(JSON.stringify({"event" : "UPDATE", "data" : serverData}))
-        voteChoice = newChoice;
+        currentChoice = newChoice;
         event.target.checked = true;
     }
 }
@@ -49,7 +49,6 @@ function connect() {
             var elementId = `option_${key}_count`
             label = document.getElementById(elementId)
             label.innerHTML = `vote count ${value}`
-            // console.log("updated")
         }
     };
 
