@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load task_tags %}
+
+{% block content %}
+    {% if error is None %}
+        <div id='chosen' value = {{choice}}> </div>
+        <div id='task' task_code = {{task.id}}> </div>
+        <div id='error' error = {{error}}> </div>
+        <div class = "container justify-content-center">
+            <div class="row mb-2">
+                <p> task code  <p class = "lead"> {{task.id}}  </p> </p>
+            </div>
+            <div class="row mb-2">
+                <p> Task Name <p class = "lead"> {{task.name}}</p> </p>
+            </div>
+            <div class="row mb-2">
+                <p> Task Description <p class = "lead"> {{task.desc}}</p></p>
+            </div>
+
+            <div class="row mb-2">
+            <p class = "lead"> Choose task weight </p>
+            {% for vote_choice in vote_list%}
+                <div class="row">
+                    <div class = "col-sm-1">
+                        <input type="radio" id= {{ "option_"|addstr:vote_choice }} name="vote" class="radio" value={{ vote_choice }} />
+                        <label for={{ "option_"|addstr:vote_choice }} class="option"> {{ vote_choice }} </label>
+                    </div>
+                    <label id = {{ "option_"|addstr:vote_choice|addstr:"_count" }} class = "col-sm-3 text-muted"></label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <script src="{% static "js/task.js" %}"></script>
+    {% else %}
+            <h2> Sorry, This task doesn't exist </h2>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class=".container-md py-3 my-5">
+  <div class ="row "> 
+  <div class="col-md-6 justify-content-center" >
+    <div class ="container-md border py-3 ">
+      <form method="POST" >
+        <h3>Open Task</h3>
+        {% csrf_token %}
+        <div class="row mb-3">
+          <label for="task" class = "col-sm-2 col-form-label">TaskCode</label>
+          <div class="col-sm-10">
+            <input id="task" class = "form-control" type="text" name="task_code" required />
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-sm-10 offset-sm-2">
+            <input type="submit" id = "task_input" class="btn btn-primary" value="Open Task" />
+          </div>  
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
+  
+    <div class="col-md-6 justify-content-center">
+        <div class ="container border py-3">
+          <h3> Create new Task </h3>
+          <form action="{% url 'create' %}"  method="POST">
+            {% csrf_token %}
+            {% comment %} <div class='form-control'> {% endcomment %}
+              <div class="row mb-3">
+                <label for="task_name" class = "col-sm-2 col-form-label">Task Name</label>
+                <div class="col-sm-10">
+                  <input id="task_name" type="text" name="task_name" required />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="task_desc" class="form-label">Task Desc</label>
+                <input id="task_desc" class ="form-control" type="textarea" name="task_desc" required />
+              </div>
+            {% comment %} </div> {% endcomment %}
+            <input type="submit" id = "task_create" class="btn btn-primary" value="Create Task" />
+          </form>
+        </div>
+    </div>
+  </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class = ".container-md py-3 d-flex justify-content-center">
+      <form action="{% url 'sign_up' %}" method="post">
+        {% csrf_token %}
+        <div class="row mb-4">
+          {% for field in form %}
+            <div class="col-md-6">
+              {{ field.label_tag }} <br>
+              {{ field }}
+            </div>
+          {% endfor %}
+          <div id = "error"> {{form.errors}} </div>
+        </div>
+        <button type="submit" class = "btn btn-primary my-3">Sign up</button>
+        <p>Already have an account? <a href="{% url 'log_in' %}">Log in!</a></p>
+      </form>
+  </div>
+{% endblock content %}
