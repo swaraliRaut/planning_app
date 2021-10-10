@@ -15,15 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+
 from task_plan.views import index, log_in, log_out, sign_up
 
 #from task_plan import urls
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('', index, name = "index"),
-    path('log_in/', log_in, name = "log_in"),
-    path('log_out/', log_out, name = "log_out"),
-    path('sign_up/', sign_up, name = "sign_up"),
+    path('', index, name="index"),
+    path('log_in/', log_in, name="log_in"),
+    path('log_out/', log_out, name="log_out"),
+    path('sign_up/', sign_up, name="sign_up"),
     path('task/', include('task_plan.urls'))
 ]

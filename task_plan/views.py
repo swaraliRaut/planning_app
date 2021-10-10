@@ -9,7 +9,7 @@ from django.urls import reverse
 def index(request):
     if request.method == "POST":
         task_code = request.POST.get('task_code')
-        return redirect(reverse('show_task', args= (task_code, )))
+        return redirect(reverse('show_task', args=(task_code, )))
     return render(request, "index.html", {})
 
 
@@ -38,6 +38,4 @@ def sign_up(request):
         if form.is_valid():
             form.save()
             return redirect(reverse('log_in'))
-        else:
-            print(form.errors)
     return render(request, 'sign_up.html', {'form': form})

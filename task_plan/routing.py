@@ -1,4 +1,5 @@
 from django.conf.urls import url
+
 from task_plan.consumers import TaskConsumer
 
 websocket_urlpatterns = [
