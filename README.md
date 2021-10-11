@@ -1,7 +1,7 @@
 # planning_app
 
 
-##setup instructions
+## setup instructions
 
 
 install pipenv
