@@ -1,11 +1,13 @@
+import asyncio
+
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db.utils import IntegrityError
-
 from django.test import TestCase
-from task_plan.models import Task, Vote
-from task_plan.model_utils import get_users_vote_for_task
-from django.contrib.auth import get_user_model
 
+from task_plan.model_utils import (get_users_vote_for_task,
+                                   get_vote_count_for_task_code)
+from task_plan.models import Task, Vote
 
 
 class TestTask(TestCase):
@@ -78,7 +80,7 @@ class ModelUtilsTest(TestCase):
         user_model = get_user_model()
         self.user = user_model.objects.create(username="user1", password="abc")
         self.task = Task.objects.create(name="task1", desc="sample desc", owner=self.user)
-        self.vote = Vote.objects.create(choice=1, voter=self.user, task=self.task)
+        self.vote = Vote.objects.create(choice="1", voter=self.user, task=self.task)
 
     def tearDown(self):
         # Clean up run after every test method.
@@ -86,4 +88,8 @@ class ModelUtilsTest(TestCase):
 
     def test_get_users_vote_for_task(self):
         self.assertEqual(get_users_vote_for_task(self.task, self.user), self.vote.choice)
-        self.assertEqual(1, 0)
+
+    async def test_get_vote_count_for_task(self):
+        expected_count = {'0': 0, '0.5': 0, '1': 1, '2': 0, '3': 0, '5': 0, '8': 0, '13': 0}
+        result = await get_vote_count_for_task_code(self.task.id)
+        self.assertEqual(result, expected_count)
